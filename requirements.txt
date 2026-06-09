@@ -1,0 +1,9 @@
+Django
+djangorestframework
+django-cors-headers
+Pillow
+python-docx
+reportlab
+docxtpl
+django-filter
+qrcode[pil]
