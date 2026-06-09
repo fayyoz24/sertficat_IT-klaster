@@ -17,7 +17,7 @@ export default function Layout({ children }) {
       <aside className={`sidebar ${sidebarOpen ? 'sidebar-open' : ''}`}>
         <div className="sidebar-logo">
           <span className="logo-icon">🎓</span>
-          <span className="logo-text">O'quv Markazi</span>
+          <span className="logo-text">IT Klaster</span>
         </div>
 
         <nav className="sidebar-nav">
