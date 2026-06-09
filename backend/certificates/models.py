@@ -59,7 +59,7 @@ class Certificate(models.Model):
 
     def get_verification_url(self, request=None):
         """Return the public verification URL for this certificate."""
-        base = "http://localhost:3000"
+        base = "https://sertficat-it-klaster.vercel.app/sertifikatlar"
         if request:
             origin = request.META.get('HTTP_ORIGIN', '')
             if origin:

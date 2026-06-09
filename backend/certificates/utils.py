@@ -145,7 +145,7 @@ def generate_certificate_docx(certificate, verification_url: str = None):
         raise FileNotFoundError(f"Shablon fayli topilmadi: {template_path}")
 
     if not verification_url:
-        verification_url = f"http://localhost:3000/verify/{certificate.verification_code}"
+        verification_url = f"https://sertficat-it-klaster.vercel.app/sertifikatlar/verify/{certificate.verification_code}"
 
     doc = DocxTemplate(template_path)
 

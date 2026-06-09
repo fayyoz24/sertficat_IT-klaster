@@ -1,7 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
 
-const FRONTEND_BASE = process.env.REACT_APP_FRONTEND_URL || 'http://localhost:3000';
+const FRONTEND_BASE = process.env.REACT_APP_FRONTEND_URL || 'https://sertficat-it-klaster.vercel.app/sertifikatlar';
 
 export default function CertificateRow({ cert, onDownload, onDelete, index }) {
   const formatDate = (d) => {
