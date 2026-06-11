@@ -232,7 +232,6 @@ export default function VerifyPage() {
             />
             {/* <InfoRow label="Mutaxassislik kodi" value={cert.specialization_code} /> */}
             <InfoRow label="Mutaxassislik" value={cert.specialization_name} />
-            <InfoRow label="Shablon" value={cert.template_name} />
             <InfoRow label="Direktor" value={cert.director_name} />
             {cert.registration_number && (
               <InfoRow label="Ro'yxat raqami" value={cert.registration_number} />
