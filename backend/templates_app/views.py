@@ -5,9 +5,11 @@ from rest_framework import viewsets, filters
 from rest_framework.parsers import MultiPartParser, FormParser
 from .models import DocumentTemplate
 from .serializers import DocumentTemplateSerializer
-
+from rest_framework.permissions import IsAdminUser
 
 class DocumentTemplateViewSet(viewsets.ModelViewSet):
+    
+    permission_classes=[IsAdminUser]
     queryset = DocumentTemplate.objects.all()
     serializer_class = DocumentTemplateSerializer
     parser_classes = [MultiPartParser, FormParser]

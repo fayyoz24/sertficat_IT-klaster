@@ -14,9 +14,10 @@ from .serializers import (
     CertificateVerifySerializer,
 )
 from .utils import generate_certificate_pdf   # PDF, not DOCX
-
+from rest_framework.permissions import AllowAny, IsAdminUser
 
 class CertificateViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAdminUser]
     queryset = Certificate.objects.select_related(
         'template', 'specialization', 'created_by'
     ).all()
