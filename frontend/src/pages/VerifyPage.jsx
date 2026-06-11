@@ -102,7 +102,6 @@ export default function VerifyPage() {
             Bu QR kod noto'g'ri yoki sertifikat o'chirilgan bo'lishi mumkin.
             Iltimos, sertifikatingizdagi QR kodni qayta tekshiring.
           </p>
-          <Link to="/" className="vp-home-link">← Bosh sahifaga qaytish</Link>
         </div>
       </div>
     );
@@ -119,7 +118,7 @@ export default function VerifyPage() {
         <div className="vp-header-inner">
           <div className="vp-logo-group">
             <span className="vp-logo-icon">🎓</span>
-            <span className="vp-logo-text">O'quv Markazi</span>
+            <span className="vp-logo-text">IT Klaster</span>
           </div>
           <div className="vp-header-right">
             <span className="vp-header-label">Sertifikat tekshiruvi</span>
@@ -231,7 +230,7 @@ export default function VerifyPage() {
               label="Sertifikat raqami"
               value={`${cert.series || ''} ${cert.certificate_number}`.trim()}
             />
-            <InfoRow label="Mutaxassislik kodi" value={cert.specialization_code} />
+            {/* <InfoRow label="Mutaxassislik kodi" value={cert.specialization_code} /> */}
             <InfoRow label="Mutaxassislik" value={cert.specialization_name} />
             <InfoRow label="Shablon" value={cert.template_name} />
             <InfoRow label="Direktor" value={cert.director_name} />
@@ -257,7 +256,7 @@ export default function VerifyPage() {
         </div>
 
         <p className="vp-footer-note">
-          Bu sahifa O'quv Markazi tomonidan avtomatik yaratilgan bo'lib,
+          Bu sahifa IT Klaster tomonidan avtomatik yaratilgan bo'lib,
           {certLabel.toLowerCase()}ning haqiqiyligini tasdiqlaydi.
           <br />
           Tekshiruv kodi: <code>{cert.verification_code}</code>
