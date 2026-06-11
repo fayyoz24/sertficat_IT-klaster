@@ -59,26 +59,26 @@ export default function SpecializationModal({ isOpen, onClose, onSuccess, editIt
             </div>
             <div className="form-group">
               <label className="form-label">Lotin (UZ) <span className="required">*</span></label>
-              <input className="form-input" placeholder="Armaturachi" value={form.name_latin}
+              <input className="form-input" placeholder="Python Dasturlash Tili" value={form.name_latin}
                 onChange={(e) => handleChange('name_latin', e.target.value)} />
             </div>
           </div>
 
           <div className="form-group">
             <label className="form-label">Kirill (UZ)</label>
-            <input className="form-input" placeholder="Арматурачи" value={form.name_cyrillic}
+            <input className="form-input" placeholder="PYTHON ДАСТУРЛАШ ТИЛИ" value={form.name_cyrillic}
               onChange={(e) => handleChange('name_cyrillic', e.target.value)} />
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <div className="form-group">
               <label className="form-label">Русский</label>
-              <input className="form-input" placeholder="Арматурщик" value={form.name_russian}
+              <input className="form-input" placeholder="ЯЗЫК ПРОГРАММИРОВАНИЯ PYTHON" value={form.name_russian}
                 onChange={(e) => handleChange('name_russian', e.target.value)} />
             </div>
             <div className="form-group">
               <label className="form-label">English</label>
-              <input className="form-input" placeholder="Reinforcement worker" value={form.name_english}
+              <input className="form-input" placeholder="Python Programming Language" value={form.name_english}
                 onChange={(e) => handleChange('name_english', e.target.value)} />
             </div>
           </div>

@@ -3,7 +3,7 @@ import './StepIndicator.css';
 
 const STEPS = [
   { number: 1, label: 'Shablon & raqam' },
-  { number: 2, label: 'Xodim F.I.O.' },
+  { number: 2, label: 'Student F.I.O.' },
   { number: 3, label: 'Kasb va davomiyligi' },
   { number: 4, label: "Direktor & ro'yxat" },
 ];

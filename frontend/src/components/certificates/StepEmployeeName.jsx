@@ -4,7 +4,7 @@ export default function StepEmployeeName({ data, onChange }) {
   return (
     <div className="form-group">
       <label className="form-label">
-        Xodim F.I.O. <span className="required">*</span>
+        Student F.I.O. <span className="required">*</span>
       </label>
       <input
         type="text"

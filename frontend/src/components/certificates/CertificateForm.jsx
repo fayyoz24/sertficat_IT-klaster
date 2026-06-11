@@ -15,7 +15,7 @@ const EMPTY = {
   director_name: '', registration_number: '', registration_date: '',
 };
 
-const STEPS = ['Shablon & raqam', 'Xodim F.I.O.', 'Kasb va davomiyligi', "Direktor & ro'yxat"];
+const STEPS = ['Shablon & raqam', 'Student F.I.O.', 'Kasb va davomiyligi', "Direktor & ro'yxat"];
 
 function validate(step, data) {
   if (step === 1) {
@@ -23,7 +23,7 @@ function validate(step, data) {
     if (!data.certificate_number) return 'Sertifikat raqami kiritilmagan';
   }
   if (step === 2) {
-    if (!data.employee_name) return "Xodim F.I.O. kiritilmagan";
+    if (!data.employee_name) return "Student F.I.O. kiritilmagan";
   }
   if (step === 3) {
     if (!data.specialization) return 'Kasb tanlanmagan';

@@ -17,7 +17,7 @@ class Certificate(models.Model):
     series = models.CharField(max_length=50, blank=True, verbose_name="Seriya")
     certificate_number = models.CharField(max_length=100, verbose_name="Sertifikat raqami")
 
-    employee_name = models.CharField(max_length=255, verbose_name="Xodim F.I.O.")
+    employee_name = models.CharField(max_length=255, verbose_name="Student F.I.O")
 
     specialization = models.ForeignKey(
         Specialization, on_delete=models.PROTECT,

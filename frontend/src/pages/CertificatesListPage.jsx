@@ -86,8 +86,8 @@ export default function CertificatesListPage() {
                 <tr>
                   <th>#</th>
                   <th>Raqam / Shablon</th>
-                  <th>Xodim F.I.O.</th>
-                  <th>Kasb</th>
+                  <th>Student F.I.O.</th>
+                  <th>Kurs</th>
                   <th>Davomiyligi</th>
                   <th>Soat</th>
                   <th>Yaratilgan</th>
