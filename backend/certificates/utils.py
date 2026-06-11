@@ -1,10 +1,10 @@
 """
 Certificate generator: docxtpl renders the DOCX template,
-then LibreOffice converts it to PDF in headless mode.
+then LibreOffice CLI converts it to PDF in headless mode.
 
 Requirements:
     pip install docxtpl qrcode[pil] pillow
-    apt install libreoffice-headless
+    apt install libreoffice-headless        # NOT docx2pdf
 """
 import io
 import os
@@ -97,11 +97,40 @@ def _make_qr_pil_fallback(url: str, size: int = 200) -> io.BytesIO:
 
 
 def _docx_to_pdf(docx_path: str, output_dir: str) -> str:
-    from docx2pdf import convert
-    pdf_path = os.path.join(output_dir, os.path.splitext(os.path.basename(docx_path))[0] + '.pdf')
-    convert(docx_path, pdf_path)   # uses MS Word on Windows, LibreOffice on Linux/Mac
+    """
+    Convert DOCX → PDF using LibreOffice headless directly via subprocess.
+    Much more reliable than docx2pdf wrapper on Linux.
+
+    Requires: apt install libreoffice-headless
+    """
+    # LibreOffice always writes output to the same dir as input,
+    # so we convert inside output_dir by working there.
+    result = subprocess.run(
+        [
+            'libreoffice', '--headless', '--norestore', '--nofirststartwizard',
+            '--convert-to', 'pdf',
+            '--outdir', output_dir,
+            docx_path,
+        ],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        timeout=60,
+    )
+
+    if result.returncode != 0:
+        stderr = result.stderr.decode(errors='replace')
+        raise RuntimeError(f"LibreOffice conversion failed (code {result.returncode}):\n{stderr}")
+
+    pdf_path = os.path.join(
+        output_dir,
+        os.path.splitext(os.path.basename(docx_path))[0] + '.pdf'
+    )
     if not os.path.exists(pdf_path):
-        raise RuntimeError(f"PDF not found after conversion: {pdf_path}")
+        raise RuntimeError(
+            f"PDF not found after LibreOffice conversion.\n"
+            f"stdout: {result.stdout.decode(errors='replace')}\n"
+            f"stderr: {result.stderr.decode(errors='replace')}"
+        )
     return pdf_path
 
 
