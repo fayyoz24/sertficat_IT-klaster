@@ -1,9 +1,9 @@
 import React from 'react';
 import { format } from 'date-fns';
 
-const FRONTEND_BASE = process.env.REACT_APP_FRONTEND_URL || 'https://sertficat-it-klaster.vercel.app/sertifikatlar';
+const FRONTEND_BASE = process.env.REACT_APP_FRONTEND_URL || 'http://localhost:3000';
 
-export default function CertificateRow({ cert, onDownload, onDelete, index }) {
+export default function CertificateRow({ cert, onDownload, onDelete, index, downloading }) {
   const formatDate = (d) => {
     try { return d ? format(new Date(d), 'dd.MM.yyyy') : '—'; }
     catch { return d || '—'; }
@@ -15,9 +15,7 @@ export default function CertificateRow({ cert, onDownload, onDelete, index }) {
 
   const copyVerifyLink = () => {
     if (!verifyUrl) return;
-    navigator.clipboard.writeText(verifyUrl).then(() => {
-      alert('Havola nusxalandi!');
-    });
+    navigator.clipboard.writeText(verifyUrl).then(() => alert('Havola nusxalandi!'));
   };
 
   return (
@@ -39,38 +37,28 @@ export default function CertificateRow({ cert, onDownload, onDelete, index }) {
       </td>
       <td>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-          {/* QR verify link */}
           {verifyUrl && (
-            <a
-              href={verifyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <a href={verifyUrl} target="_blank" rel="noopener noreferrer"
               className="btn btn-secondary btn-sm btn-icon"
-              title="Sertifikatni tekshirish sahifasi"
-            >🔍</a>
+              title="Sertifikatni tekshirish sahifasi">🔍</a>
           )}
-          {/* Copy verify link */}
           {verifyUrl && (
-            <button
-              className="btn btn-secondary btn-sm btn-icon"
-              onClick={copyVerifyLink}
-              title="Tekshiruv havolasini nusxalash"
-            >🔗</button>
+            <button className="btn btn-secondary btn-sm btn-icon"
+              onClick={copyVerifyLink} title="Tekshiruv havolasini nusxalash">🔗</button>
           )}
-          {/* Download */}
+          {/* PDF download */}
           {cert.generated_pdf && (
             <button
               className="btn btn-success btn-sm btn-icon"
               onClick={() => onDownload(cert.id)}
-              title="DOCX yuklab olish"
-            >⬇</button>
+              disabled={downloading}
+              title="PDF yuklab olish"
+            >
+              {downloading ? '⏳' : '⬇'}
+            </button>
           )}
-          {/* Delete */}
-          <button
-            className="btn btn-danger btn-sm btn-icon"
-            onClick={() => onDelete(cert)}
-            title="O'chirish"
-          >🗑</button>
+          <button className="btn btn-danger btn-sm btn-icon"
+            onClick={() => onDelete(cert)} title="O'chirish">🗑</button>
         </div>
       </td>
     </tr>

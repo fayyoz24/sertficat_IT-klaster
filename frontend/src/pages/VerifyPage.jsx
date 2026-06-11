@@ -62,10 +62,10 @@ export default function VerifyPage() {
     setDownloading(true);
     try {
       const res = await certificatesApi.download(cert.id);
-      const url = URL.createObjectURL(new Blob([res.data]));
+      const url = URL.createObjectURL(new Blob([res.data], { type: 'application/pdf' }));
       const a = document.createElement('a');
       a.href = url;
-      a.download = `sertifikat_${cert.certificate_number}.docx`;
+      a.download = `sertifikat_${cert.certificate_number}.pdf`;
       a.click();
       URL.revokeObjectURL(url);
     } catch { alert("Yuklab bo'lmadi"); }

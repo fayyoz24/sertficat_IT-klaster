@@ -15,7 +15,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build"
   },
-  "proxy": "https://sertificateklaster.pythonanywhere.com",
   "browserslist": {
     "production": [
       ">0.2%",

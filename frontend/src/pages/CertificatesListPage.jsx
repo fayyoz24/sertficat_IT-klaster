@@ -26,9 +26,7 @@ export default function CertificatesListPage() {
         setCerts(data);
         setTotalPages(1);
       }
-    } catch { /* ignore */ } finally {
-      setLoading(false);
-    }
+    } catch { /* ignore */ } finally { setLoading(false); }
   }, [search, page]);
 
   useEffect(() => { load(); }, [load]);
@@ -37,10 +35,10 @@ export default function CertificatesListPage() {
     setDownloading(id);
     try {
       const res = await certificatesApi.download(id);
-      const url = URL.createObjectURL(new Blob([res.data]));
+      const url = URL.createObjectURL(new Blob([res.data], { type: 'application/pdf' }));
       const a = document.createElement('a');
       a.href = url;
-      a.download = `sertifikat_${id}.docx`;
+      a.download = `sertifikat_${id}.pdf`;   // ← .pdf
       a.click();
       URL.revokeObjectURL(url);
     } catch { alert('Yuklab bo\'lmadi'); }
@@ -65,25 +63,19 @@ export default function CertificatesListPage() {
           <h1 className="page-title">Sertifikatlar</h1>
           <p className="page-subtitle">Barcha yaratilgan sertifikatlar ro'yxati</p>
         </div>
-        <Link to="/sertifikatlar/yangi" className="btn btn-primary">
-          ＋ Yangi sertifikat
-        </Link>
+        <Link to="/sertifikatlar/yangi" className="btn btn-primary">＋ Yangi sertifikat</Link>
       </div>
 
       <div className="card">
         <div className="card-header">
-          <span style={{ fontSize: 14, color: 'var(--gray-600)' }}>
-            Jami: {certs.length} ta
-          </span>
+          <span style={{ fontSize: 14, color: 'var(--gray-600)' }}>Jami: {certs.length} ta</span>
           <SearchInput value={search} onChange={(v) => { setSearch(v); setPage(1); }} />
         </div>
 
         {loading ? (
           <div className="loading-center"><Spinner /> <span>Yuklanmoqda...</span></div>
         ) : certs.length === 0 ? (
-          <EmptyState
-            icon="📄"
-            title="Sertifikatlar yo'q"
+          <EmptyState icon="📄" title="Sertifikatlar yo'q"
             description="Hali hech qanday sertifikat yaratilmagan"
             action={<Link to="/sertifikatlar/yangi" className="btn btn-primary">＋ Yaratish</Link>}
           />

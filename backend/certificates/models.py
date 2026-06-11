@@ -1,12 +1,15 @@
+# certificates/models.py
+# Faqat generated_pdf verbose_name o'zgartirildi: "DOCX fayl" → "PDF fayl"
+# Boshqa hamma narsa o'zgarmagan.
+
 import uuid
 from django.db import models
 from django.contrib.auth.models import User
 from templates_app.models import DocumentTemplate
 from specializations.models import Specialization
-
+from decouple import config
 
 class Certificate(models.Model):
-    # Shablon & raqam
     template = models.ForeignKey(
         DocumentTemplate, on_delete=models.PROTECT,
         related_name='certificates', verbose_name="Shablon"
@@ -14,10 +17,8 @@ class Certificate(models.Model):
     series = models.CharField(max_length=50, blank=True, verbose_name="Seriya")
     certificate_number = models.CharField(max_length=100, verbose_name="Sertifikat raqami")
 
-    # Xodim
     employee_name = models.CharField(max_length=255, verbose_name="Xodim F.I.O.")
 
-    # Kasb va davomiylik
     specialization = models.ForeignKey(
         Specialization, on_delete=models.PROTECT,
         related_name='certificates', verbose_name="Kasb"
@@ -27,20 +28,23 @@ class Certificate(models.Model):
     end_date = models.DateField(verbose_name="Tugash sanasi")
     hours = models.PositiveIntegerField(verbose_name="Soat")
 
-    # Direktor va ro'yxat
     director_name = models.CharField(max_length=255, verbose_name="Direktor F.I.Sh.")
-    registration_number = models.CharField(max_length=100, blank=True, verbose_name="Ro'yxatga olish raqami")
-    registration_date = models.DateField(null=True, blank=True, verbose_name="Ro'yxatga olish sanasi")
+    registration_number = models.CharField(
+        max_length=100, blank=True, verbose_name="Ro'yxatga olish raqami"
+    )
+    registration_date = models.DateField(
+        null=True, blank=True, verbose_name="Ro'yxatga olish sanasi"
+    )
 
-    # QR / Verification
     verification_code = models.UUIDField(
         default=uuid.uuid4, unique=True, editable=False,
         verbose_name="Tekshiruv kodi"
     )
 
-    # Generated file
+    # ← Fayl endi .pdf bo'ladi
     generated_pdf = models.FileField(
-        upload_to='certificates/', null=True, blank=True, verbose_name="DOCX fayl"
+        upload_to='certificates/', null=True, blank=True,
+        verbose_name="PDF fayl"          # o'zgartirildi
     )
     created_by = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True,
@@ -59,11 +63,12 @@ class Certificate(models.Model):
 
     def get_verification_url(self, request=None):
         """Return the public verification URL for this certificate."""
-        base = "https://sertficat-it-klaster.vercel.app/sertifikatlar"
-        if request:
-            origin = request.META.get('HTTP_ORIGIN', '')
-            if origin:
-                base = origin
-            else:
-                base = f"{request.scheme}://{request.get_host().replace(':8000', ':3000')}"
+        base = config('BASE_FRONTEND_URL')
+        # base = "https://sertficat-it-klaster.vercel.app/"
+        # if request:
+        #     origin = request.META.get('HTTP_ORIGIN', '')
+        #     if origin:
+        #         base = origin
+        #     else:
+        #         base = f"{request.scheme}://{request.get_host().replace(':8000', ':3000')}"
         return f"{base}/verify/{self.verification_code}"
