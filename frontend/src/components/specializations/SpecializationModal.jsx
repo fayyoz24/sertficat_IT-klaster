@@ -45,7 +45,7 @@ export default function SpecializationModal({ isOpen, onClose, onSuccess, editIt
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal modal-md" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
-          <h3 className="modal-title">{editItem ? 'Mutaxassislikni tahrirlash' : 'Yangi mutaxassislik'}</h3>
+          <h3 className="modal-title">{editItem ? 'Kursni tahrirlash' : 'Yangi kurs'}</h3>
           <button className="btn btn-ghost btn-icon" onClick={onClose}>✕</button>
         </div>
         <div className="modal-body" style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>

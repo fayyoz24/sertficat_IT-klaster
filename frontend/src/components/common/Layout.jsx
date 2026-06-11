@@ -6,7 +6,7 @@ import './Layout.css';
 const NAV_ITEMS = [
   { path: '/sertifikatlar', label: 'Sertifikatlar', icon: '📄' },
   { path: '/shablonlar', label: 'Shablonlar', icon: '📋' },
-  { path: '/mutaxassisliklar', label: 'Mutaxassisliklar', icon: '🏷️' },
+  { path: '/kurslar', label: 'Kurslar', icon: '🏷️' },
 ];
 
 export default function Layout({ children }) {

@@ -37,7 +37,7 @@ function App() {
                   <Route path="/sertifikatlar/yangi" element={<CertificateCreatePage />} />
                   <Route path="/sertifikatlar/:id/tahrirlash" element={<CertificateCreatePage />} />
                   <Route path="/shablonlar" element={<TemplatesPage />} />
-                  <Route path="/mutaxassisliklar" element={<SpecializationsPage />} />
+                  <Route path="/kurslar" element={<SpecializationsPage />} />
                 </Routes>
               </Layout>
             </PrivateRoute>

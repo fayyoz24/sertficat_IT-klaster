@@ -41,8 +41,8 @@ export default function SpecializationsPage() {
     <div>
       <div className="page-header">
         <div>
-          <h1 className="page-title">Mutaxassisliklar (Kasblar)</h1>
-          <p className="page-subtitle">Barcha mutaxassisliklar ({items.length})</p>
+          <h1 className="page-title">Kurslar</h1>
+          <p className="page-subtitle">Barcha kurslar ({items.length})</p>
         </div>
         <button className="btn btn-primary" onClick={openCreate}>＋ Yangi</button>
       </div>
@@ -50,7 +50,7 @@ export default function SpecializationsPage() {
       <div className="card">
         <div className="card-header">
           <span style={{ fontSize: 14, color: 'var(--gray-600)' }}>
-            {items.length} ta mutaxassislik
+            {items.length} ta kurs mavjud
           </span>
           <SearchInput value={search} onChange={setSearch} placeholder="Qidirish..." />
         </div>
@@ -60,8 +60,8 @@ export default function SpecializationsPage() {
         ) : items.length === 0 ? (
           <EmptyState
             icon="🏷️"
-            title="Mutaxassisliklar yo'q"
-            description="Hali hech qanday mutaxassislik qo'shilmagan"
+            title="Kurslar yo'q"
+            description="Hali hech qanday kurs qo'shilmagan"
             action={<button className="btn btn-primary" onClick={openCreate}>＋ Qo'shish</button>}
           />
         ) : (
@@ -103,8 +103,8 @@ export default function SpecializationsPage() {
 
       <ConfirmModal
         isOpen={!!deleteTarget}
-        title="Mutaxassislikni o'chirish"
-        message={`"${deleteTarget?.name_latin}" mutaxassisligini o'chirishni tasdiqlaysizmi?`}
+        title="Kursni o'chirish"
+        message={`"${deleteTarget?.name_latin}" kursini o'chirishni tasdiqlaysizmi?`}
         onConfirm={handleDelete}
         onCancel={() => setDeleteTarget(null)}
         loading={deleting}
