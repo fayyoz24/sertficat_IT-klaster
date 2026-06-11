@@ -87,7 +87,17 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
- 
+
+# settings.py
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),   # access token umri
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),       # refresh token umri
+    'ROTATE_REFRESH_TOKENS': True,   # har refreshda yangi refresh token ham beradi
+    'BLACKLIST_AFTER_ROTATION': True, # eski refresh tokenni o'chiradi
+}
+
 LANGUAGE_CODE = 'uz-uz'
 TIME_ZONE = 'Asia/Tashkent'
 USE_I18N = True

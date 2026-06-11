@@ -7,4 +7,5 @@ router.register('', CertificateViewSet, basename='certificate')
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('verify/<uuid:code>/', verify_certificate, name='verify-certificate')
 ]
