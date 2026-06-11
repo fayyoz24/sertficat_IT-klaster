@@ -1,10 +1,10 @@
 from rest_framework import viewsets, filters
 from .models import Specialization
 from .serializers import SpecializationSerializer
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAuthenticated
 
 class SpecializationViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAuthenticated]
     queryset = Specialization.objects.all()
     serializer_class = SpecializationSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]

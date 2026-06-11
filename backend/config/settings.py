@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'django_filters',
+    'rest_framework_simplejwt',
+
+
     'certificates',
     'templates_app',
     'specializations',
@@ -97,6 +100,29 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,   # har refreshda yangi refresh token ham beradi
     'BLACKLIST_AFTER_ROTATION': True, # eski refresh tokenni o'chiradi
 }
+ 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+ 
+CORS_ALLOW_ALL_ORIGINS = True
+ 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ],
+
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.PageNumberPagination',
+
+    'PAGE_SIZE': 20,
+}
 
 LANGUAGE_CODE = 'uz-uz'
 TIME_ZONE = 'Asia/Tashkent'
@@ -108,13 +134,3 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
- 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
- 
-CORS_ALLOW_ALL_ORIGINS = True
- 
-REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 20,
-}
